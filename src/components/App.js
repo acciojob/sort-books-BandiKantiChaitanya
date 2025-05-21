@@ -7,8 +7,8 @@ import { setBooks } from "../Redux.js/BookSlice";
 const App = () => {
   const books=useSelector((state)=>state.books.items)
   const dispatch=useDispatch()
-  let [sortKey,setSortKey]=useState('')
-  let [sortOrder,setSortOrder]=useState('')
+  let [sortKey,setSortKey]=useState('title')
+  let [sortOrder,setSortOrder]=useState('asc')
 
   useEffect(()=>{
     fetch('https://www.dbooks.org/api/recent')
@@ -37,7 +37,6 @@ const App = () => {
         
         <label htmlFor='sort' >Sort by:
         <select id="sort" onChange={(e)=>{setSortKey(e.target.value)}} >
-          <option value="">Select</option>
           <option value="title">Title</option>
           <option value="authors">Author</option>
           <option value="subtitle">Publisher</option>
@@ -45,8 +44,8 @@ const App = () => {
         </label>
         <label htmlFor='orderBy' >Order:
         <select  id="orderBy" onChange={(e)=>{setSortOrder(e.target.value)}}>
-          <option value="asc">Ascending </option>
-          <option value="dsc">Descending </option>
+          <option value="asc">Ascending</option>
+          <option value="dsc">Descending</option>
         </select>
         </label>
       </div>
