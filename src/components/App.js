@@ -32,8 +32,9 @@ const App = () => {
   .slice(0, 15);
   return (
     <div>
+      <h1>Books List</h1>
       <div>
-        <h1>Books List</h1>
+        
         <label htmlFor='sort' >Sort by:</label>
         <select id="sort" onChange={(e)=>{setSortKey(e.target.value)}} >
           <option value="">Select</option>
@@ -41,6 +42,8 @@ const App = () => {
           <option value="authors">Author</option>
           <option value="subtitle">Publisher</option>
         </select>
+        </div>
+        <div>
         <label htmlFor='orderBy' >Order:</label>
         <select  id="orderBy" onChange={(e)=>{setSortOrder(e.target.value)}}>
           <option value="asc">Ascending </option>
