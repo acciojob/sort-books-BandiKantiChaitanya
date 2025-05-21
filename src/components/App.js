@@ -27,19 +27,22 @@ const App = () => {
     const bVal = b[key]?.toLowerCase() || '';
     if(sortOrder==='asc')return aVal.localeCompare(bVal)
     else if(sortOrder==='dsc')return bVal.localeCompare(aVal)
+  return 0
   })
-
+  .slice(0, 20);
   return (
     <div>
       <div>
-        <p>Sort by:</p>
-        <select onChange={(e)=>{setSortKey(e.target.value)}} >
+        <h1>Books List</h1>
+        <label htmlFor='sort' >sort by</label>
+        <select id="sort" onChange={(e)=>{setSortKey(e.target.value)}} >
           <option value="">Select</option>
           <option value="title">Title</option>
           <option value="authors">Author</option>
           <option value="subtitle">Publisher</option>
         </select>
-        <select onChange={(e)=>{setSortOrder(e.target.value)}}>
+        <label htmlFor='sort' >order</label>
+        <select  id="sort" onChange={(e)=>{setSortOrder(e.target.value)}}>
           <option value="asc">Ascending </option>
           <option value="dsc">Descending </option>
         </select>
@@ -50,7 +53,7 @@ const App = () => {
             <th>Title</th>
             <th>Author</th>
             <th>Publisher</th>
-            <th>ISBN</th>
+            {/* <th>ISBN</th> */}
             </tr>
           </thead>
           <tbody>
@@ -60,7 +63,7 @@ const App = () => {
                 <td>{book.title}</td>
                 <td>{book.authors}</td>
                 <td>{book.subtitle}</td>
-                <td>{book.id}</td>
+                {/* <td>{book.id}</td> */}
                 </tr>
               ))
             }
