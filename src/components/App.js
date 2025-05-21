@@ -1,11 +1,71 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './../styles/App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBooks } from "../Redux.js/BookSlice";
 
 const App = () => {
+  const books=useSelector((state)=>state.books.items)
+  const dispatch=useDispatch()
+  let [sortKey,setSortKey]=useState('')
+  let [sortOrder,setSortOrder]=useState('')
+
+  useEffect(()=>{
+    fetch('https://www.dbooks.org/api/recent')
+    .then((response) => response.json())
+    .then((data) => {
+      dispatch(setBooks(data.books));
+    })
+    .catch((error) => {
+      console.error('Error fetching books:', error);
+    });
+  },[dispatch])
+  // console.log(books)
+  const sortedBooks=[...books].sort((a,b)=>{
+    let key=sortKey.toLowerCase()
+    const aVal = a[key]?.toLowerCase() || '';
+    const bVal = b[key]?.toLowerCase() || '';
+    if(sortOrder==='asc')return aVal.localeCompare(bVal)
+    else if(sortOrder==='dsc')return bVal.localeCompare(aVal)
+  })
+
   return (
     <div>
-        {/* Do not remove the main div */}
+      <div>
+        <p>Sort by:</p>
+        <select onChange={(e)=>{setSortKey(e.target.value)}} >
+          <option value="">Select</option>
+          <option value="title">Title</option>
+          <option value="authors">Author</option>
+          <option value="subtitle">Publisher</option>
+        </select>
+        <select onChange={(e)=>{setSortOrder(e.target.value)}}>
+          <option value="asc">Ascending </option>
+          <option value="dsc">Descending </option>
+        </select>
+      </div>
+        <table>
+          <thead>
+            <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>ISBN</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              sortedBooks.map((book,i)=>(
+                <tr key={i} >
+                <td>{book.title}</td>
+                <td>{book.authors}</td>
+                <td>{book.subtitle}</td>
+                <td>{book.id}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
     </div>
   )
 }
