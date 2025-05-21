@@ -35,20 +35,20 @@ const App = () => {
       <h1>Books List</h1>
       <div>
         
-        <label htmlFor='sort' >Sort by:</label>
+        <label htmlFor='sort' >Sort by:
         <select id="sort" onChange={(e)=>{setSortKey(e.target.value)}} >
           <option value="">Select</option>
           <option value="title">Title</option>
           <option value="authors">Author</option>
           <option value="subtitle">Publisher</option>
         </select>
-        </div>
-        <div>
-        <label htmlFor='orderBy' >Order:</label>
+        </label>
+        <label htmlFor='orderBy' >Order:
         <select  id="orderBy" onChange={(e)=>{setSortOrder(e.target.value)}}>
           <option value="asc">Ascending </option>
           <option value="dsc">Descending </option>
         </select>
+        </label>
       </div>
         <table>
           <thead>
